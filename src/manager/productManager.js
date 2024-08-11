@@ -36,21 +36,18 @@ class ProductManager {
         fs.writeFileSync(this.filePath, JSON.stringify(this.products, null, 2));
     }
 
-    addProduct(title, description, price, code, stock, category, thumbnails = []) {
-        if (!title || !description || !price || !code || !stock || !category) {
-            const errorMsg = 'Todos los campos son obligatorios: title, description, price, code, stock y category.';
+    addProduct(title, description, price, stock, category, thumbnails = []) {
+        if (!title || !description || !price || !stock || !category) {
+            const errorMsg = 'Todos los campos son obligatorios: title, description, price, stock y category.';
             return { success: false, message: errorMsg };
         }
-
-        if (this.products.some(product => product.code === code)) {
-            const errorMsg = `El producto con el código ${code} ya existe.`;
-            return { success: false, message: errorMsg };
-        }
-
+    
+        const code = uuidv4();
+    
         const newProduct = new Product(uuidv4(), title, description, price, code, stock, category, thumbnails);
         this.products.push(newProduct);
         this.saveProducts();
-        const successMsg = `Producto agregado`;
+        const successMsg = `Producto agregado con código ${code}`;
         return { success: true, message: successMsg, newProduct };
     }
 

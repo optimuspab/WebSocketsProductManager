@@ -1,13 +1,1 @@
-[
-  {
-    "id": "b72cff91-e67c-42e8-93be-b5c3a1416dd8",
-    "title": "Producto Test",
-    "description": "Descripción del producto test",
-    "price": 99.99,
-    "status": true,
-    "code": "TEST123",
-    "stock": 10,
-    "category": "Electrónica",
-    "thumbnails": []
-  }
-]
+[]

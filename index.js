@@ -15,11 +15,13 @@ io.on('connection', (socket) => {
     socket.emit('products', productManager.getProducts());
 
     socket.on('new-product', (data) => {
-        const newProduct = productManager.addProduct(data.title, 'Descripción', data.price, 'Código', 10, 'Categoría');
+        const newProduct = productManager.addProduct(data.title, data.description, data.price, data.stock, data.category, data.thumbnails);
         if (newProduct.success) {
             io.emit('products', productManager.getProducts());
+        } else {
+            console.log(newProduct.message);
         }
-    });
+    });    
 
     socket.on('delete-product', (productId) => {
         const success = productManager.deleteProduct(productId);
